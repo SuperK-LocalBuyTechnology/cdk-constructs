@@ -1,0 +1,5 @@
+commit_msg=$(cat "$1")
+if [ "$commit_msg" = "WIP" ]; then
+    exit 0
+fi
+npx --no-install commitlint --edit "$1"

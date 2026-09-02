@@ -1,0 +1,82 @@
+{
+    "name": "@superk-in/cdk-constructs",
+    "description": "Opinionated AWS CDK constructs for Lambda, DynamoDB, SQS, EventBridge and EventBridge Scheduler.",
+    "version": "0.2.0",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SuperK-LocalBuyTechnology/cdk-constructs.git"
+    },
+    "homepage": "https://github.com/SuperK-LocalBuyTechnology/cdk-constructs#readme",
+    "bugs": {
+        "url": "https://github.com/SuperK-LocalBuyTechnology/cdk-constructs/issues"
+    },
+    "author": "SuperK-LocalBuyTechnology",
+    "engines": {
+        "node": ">=18"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "keywords": [
+        "aws-cdk",
+        "cdk",
+        "constructs",
+        "aws-lambda",
+        "dynamodb",
+        "sqs",
+        "eventbridge",
+        "typescript"
+    ],
+    "scripts": {
+        "build": "tsup",
+        "prepublishOnly": "npm run build && npm test",
+        "clean": "rm -rf node_modules && npm install",
+        "watch": "tsc -w",
+        "test": "jest",
+        "typecheck": "tsc --noEmit",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
+        "format": "prettier --write \"**/*.{ts,mts,cts,js,mjs,cjs,json}\"",
+        "format:check": "prettier --check \"**/*.{ts,mts,cts,js,mjs,cjs,json}\"",
+        "prepare": "husky"
+    },
+    "lint-staged": {
+        "*.{ts,mts,cts,js,mjs,cjs}": [
+            "prettier --write",
+            "eslint --fix"
+        ],
+        "*.json": "prettier --write"
+    },
+    "peerDependencies": {
+        "aws-cdk-lib": "^2.266.0",
+        "constructs": "^10.8.1"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^21.0.1",
+        "@commitlint/config-conventional": "^21.0.1",
+        "@eslint/js": "^9.39.4",
+        "@types/jest": "^29.5.12",
+        "@types/node": "20.11.16",
+        "aws-cdk-lib": "2.266.0",
+        "constructs": "10.8.1",
+        "eslint": "^9.39.4",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-prettier": "^5.5.5",
+        "globals": "^17.6.0",
+        "husky": "^9.1.7",
+        "jest": "^29.7.0",
+        "jiti": "^2.7.0",
+        "lint-staged": "^17.0.5",
+        "prettier": "^3.8.3",
+        "ts-jest": "^29.1.2",
+        "tsup": "^8.0.0",
+        "typescript": "~5.3.3",
+        "typescript-eslint": "^8.59.4"
+    }
+}
