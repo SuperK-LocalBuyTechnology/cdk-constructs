@@ -48,21 +48,21 @@ export class SQSLambda extends Construct {
         super(scope, id);
 
         // Ensure SQS visibility timeout is at least as long as Lambda timeout
-        const lambdaTimeout = props.lambdaProps.timeout ?? Duration.seconds(30);
+        const lambdaTimeout = props.lambdaProps.timeout ?? Duration.seconds(900);
         const sqsProps = {
             ...props.sqsProps,
             visibilityTimeout: Duration.seconds(
-                Math.max(
-                    lambdaTimeout.toSeconds(),
-                    (props.sqsProps.visibilityTimeout ?? Duration.seconds(30)).toSeconds()
-                )
+                Math.max(lambdaTimeout.toSeconds(), (props.sqsProps.visibilityTimeout ?? lambdaTimeout).toSeconds())
             ),
         };
 
         const vanillaSQS = new VanillaSQS(this, "SQS", sqsProps);
         this.sqs = vanillaSQS.sqs;
 
-        this.lambda = new VanillaLambda(this, "Handler", props.lambdaProps);
+        this.lambda = new VanillaLambda(this, "Handler", {
+            ...props.lambdaProps,
+            timeout: lambdaTimeout,
+        });
 
         this.lambda.addEventSource(
             new SqsEventSource(vanillaSQS.sqs, {
