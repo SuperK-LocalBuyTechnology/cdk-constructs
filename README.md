@@ -183,6 +183,14 @@ const onWidgetCreated = new EventProcessingLambda(this, "OnWidgetCreated", {
 `ruleProps` passes straight through to CDK's `RuleProps`. Access members via
 `.eventProcessingLambda` and `.rule`.
 
+Because EventBridge invokes the function asynchronously, a handler that throws is
+retried twice by Lambda and then dropped. This construct therefore enables the
+function's dead letter queue by default, so failed events stay redrivable. Opt out
+with `lambdaProps: { deadLetterQueueEnabled: false }`.
+
+Note that a function DLQ message body is the raw event payload — the error details
+arrive as SQS message attributes (`RequestID`, `ErrorCode`, `ErrorMessage`).
+
 ## What this is not
 
 A construct library, not a CDK app — there is no `bin/` entrypoint and no `cdk.json`.

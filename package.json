@@ -1,7 +1,7 @@
 {
     "name": "@superk-in/cdk-constructs",
     "description": "Opinionated AWS CDK constructs for Lambda, DynamoDB, SQS, EventBridge and EventBridge Scheduler.",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "license": "MIT",
     "repository": {
         "type": "git",
